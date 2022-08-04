@@ -1,6 +1,7 @@
 {
   "name": "a11y-upskill",
   "version": "1.0.0",
+  "homepage": "http://localhost:9001",
   "private": true,
   "description": "a11y-upskill",
   "keywords": [
@@ -12,25 +13,43 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "typecheck": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "tsc:watch": "tsc --noEmit --watch",
+    "lint": "eslint src"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
+    "@hookform/resolvers": "^2.9.7",
+    "date-fns": "^2.29.2",
     "gatsby": "^4.20.0",
     "gatsby-plugin-emotion": "^7.20.0",
     "gatsby-plugin-image": "^2.20.0",
+    "gatsby-plugin-react-svg": "^3.1.0",
     "gatsby-plugin-sharp": "^4.20.0",
     "gatsby-plugin-sitemap": "^5.20.0",
     "gatsby-source-filesystem": "^4.20.0",
     "gatsby-transformer-sharp": "^4.20.0",
+    "install": "^0.13.0",
+    "npm": "^8.17.0",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-hook-form": "^7.34.2",
+    "zod": "^3.18.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.45",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "axe-core": "^4.4.3",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.30.1",
+    "msw": "^0.44.2",
     "typescript": "^4.7.4"
+  },
+  "msw": {
+    "workerDirectory": "static"
   }
 }

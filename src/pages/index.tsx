@@ -1,193 +1,489 @@
-import * as React from "react"
-import type { HeadFC } from "gatsby"
+import React from "react";
+import styled from "@emotion/styled";
+import type { HeadFC } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
+import SkipLinks, { SkipLinkItem } from "~/components/skip-links/skip-links";
+import { getColor } from "~/theme/colors";
+import { defaultSpacing } from "~/theme/spacing";
+import { getTypography } from "~/theme/typography";
+import Button from "../components/button/button";
+import { media } from "../theme/media";
 
-const pageStyles = {
-  color: "#232129",
-  padding: 96,
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
-const headingAccentStyles = {
-  color: "#663399",
-}
-const paragraphStyles = {
-  marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
-const listStyles = {
-  marginBottom: 96,
-  paddingLeft: 0,
-}
-const doclistStyles = {
-  paddingLeft: 0,
-}
-const listItemStyles = {
-  fontWeight: 300,
-  fontSize: 24,
-  maxWidth: 560,
-  marginBottom: 30,
-}
+const skipLinks: SkipLinkItem[] = [
+  { href: "#main", label: "Skip to main" },
+  { href: "#footer", label: "Skip to page footer" },
+];
 
-const linkStyle = {
-  color: "#8954A8",
-  fontWeight: "bold",
-  fontSize: 16,
-  verticalAlign: "5%",
-}
+const StyledHeader = styled.h1`
+  ${getTypography("h1")}
+  margin: 0px 0px 2rem;
+  text-align: center;
+`;
 
-const docLinkStyle = {
-  ...linkStyle,
-  listStyleType: "none",
-  display: `inline-block`,
-  marginBottom: 24,
-  marginRight: 12,
-}
+const StyledHeroContainer = styled.section`
+  ${defaultSpacing}
+  min-height: 100vh;
+  padding-bottom: 64px;
+  padding-top: 64px;
+  color: #565d8f;
 
-const descriptionStyle = {
-  color: "#232129",
-  fontSize: 14,
-  marginTop: 10,
-  marginBottom: 0,
-  lineHeight: 1.25,
-}
+  background-repeat: no-repeat;
 
-const docLinks = [
-  {
-    text: "TypeScript Documentation",
-    url: "https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/",
-    color: "#8954A8",
-  },
-  {
-    text: "GraphQL Typegen Documentation",
-    url: "https://www.gatsbyjs.com/docs/how-to/local-development/graphql-typegen/",
-    color: "#8954A8",
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledHeroParagraph = styled.p`
+  font-size: 1.2rem;
+  padding: 0px 16px;
+  text-align: center;
+  line-height: 1.6rem;
+  max-width: 48ch;
+
+  ${media.M} {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+
+    padding: 0px 32px;
+    max-width: 64ch;
   }
-]
 
-const badgeStyle = {
-  color: "#fff",
-  backgroundColor: "#088413",
-  border: "1px solid #088413",
-  fontSize: 11,
-  fontWeight: "bold",
-  letterSpacing: 1,
-  borderRadius: 4,
-  padding: "4px 6px",
-  display: "inline-block",
-  position: "relative" as "relative",
-  top: -2,
-  marginLeft: 10,
-  lineHeight: 1,
-}
+  ${media.L} {
+    font-size: 2rem;
+    line-height: 3rem;
+    padding: 0px 48px;
+  }
 
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial/",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-    color: "#E95800",
-  },
-  {
-    text: "How to Guides",
-    url: "https://www.gatsbyjs.com/docs/how-to/",
-    description:
-      "Practical step-by-step guides to help you achieve a specific goal. Most useful when you're trying to get something done.",
-    color: "#1099A8",
-  },
-  {
-    text: "Reference Guides",
-    url: "https://www.gatsbyjs.com/docs/reference/",
-    description:
-      "Nitty-gritty technical descriptions of how Gatsby works. Most useful when you need detailed information about Gatsby's APIs.",
-    color: "#BC027F",
-  },
-  {
-    text: "Conceptual Guides",
-    url: "https://www.gatsbyjs.com/docs/conceptual/",
-    description:
-      "Big-picture explanations of higher-level Gatsby concepts. Most useful for building understanding of a particular topic.",
-    color: "#0D96F2",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-    color: "#8EB814",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    badge: true,
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
-    color: "#663399",
-  },
-]
+  ${media.XL} {
+    font-size: 2.6rem;
+    line-height: 3.4rem;
+    padding: 0px 64px;
+  }
+`;
+
+const DescriptionSection = styled.section`
+  ${defaultSpacing}
+
+  display: grid;
+  gap: 48px;
+  padding-bottom: 48px;
+
+  ${media.M} {
+    margin-top: -30vh;
+    padding-top: 25vh;
+    padding-bottom: 12vh;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  margin-top: 70px;
+`;
+
+const ImageWrapper = styled.div<{ shadow?: "left" | "right" }>`
+  display: flex;
+  max-width: 480px;
+  margin: auto;
+  box-shadow: ${({ shadow }) => (shadow === "left" ? -10 : 10)}px -8px ${getColor("pink1")};
+  margin-top: 32px;
+
+  ${media.M} {
+    width: 90%;
+    max-width: 900px;
+  }
+`;
+
+const TopicsSection = styled.section`
+  text-align: center;
+  ${defaultSpacing}
+`;
+
+const FlexTile = styled.div`
+  ${media.M} {
+    flex: 0 0 50%;
+  }
+`;
+
+const DescriptionArticle = styled.article<{ reverse?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+
+  ${media.M} {
+    max-width: 1200px;
+    flex-direction: ${({ reverse }) => (reverse ? "row-reverse" : "row")};
+    justify-content: space-between;
+  }
+
+  ul {
+    padding-left: 24px;
+    margin: 0;
+    margin-top: 8px;
+
+    li {
+      ${getTypography("p")}
+    }
+  }
+`;
+
+const Header = styled.h2`
+  ${getTypography("h2")}
+  margin-bottom: 16px;
+
+  > span {
+    background-color: ${getColor("pink1")};
+    box-shadow: 10px 0px ${getColor("pink1")}, -10px 0px ${getColor("pink1")};
+    line-height: 2.8rem;
+  }
+`;
+
+const DescriptionParagraph = styled.p`
+  ${getTypography("p")}
+
+  ${media.M} {
+    max-width: 45ch;
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
+
+  ${media.L} {
+  }
+`;
+
+const DescriptionContent = styled.div`
+  ${media.M} {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+    max-width: 70%;
+    margin: auto;
+  }
+`;
+
+const TopicsSectionHeader = styled(Header)`
+  margin-bottom: 16px;
+
+  ${media.S} {
+    margin-bottom: 24px;
+  }
+
+  ${media.M} {
+    margin-bottom: 48px;
+  }
+`;
+
+const TopicsList = styled.ul`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+  list-style: none;
+  padding-left: 0px;
+
+  ${media.M} {
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
+const TopicItem = styled.li`
+  text-align: center;
+`;
+
+const TopicHeader = styled.h3`
+  ${getTypography("h3")}
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  ${media.M} {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+  }
+`;
+
+const TopicImage = () => (
+  <StaticImage
+    src="../images/rect-illustration.jpg"
+    alt="Image for "
+    placeholder="blurred"
+    layout="constrained"
+  />
+);
+
+const TestimonialSection = styled.section`
+  ${defaultSpacing};
+  padding-top: 64px;
+  padding-bottom: 64px;
+
+  ${media.M} {
+    padding-top: 128px;
+    padding-bottom: 128px;
+  }
+`;
+
+const TestimonialContainer = styled.article`
+  padding: 32px;
+  background-color: ${getColor("pink1")};
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+
+  ${media.S} {
+    padding: 48px;
+  }
+`;
+
+const Blockquote = styled.blockquote`
+  margin: 0;
+  > p {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    margin-bottom: 1rem;
+
+    ${media.S} {
+      margin-bottom: 1.8rem;
+    }
+  }
+
+  > address {
+    font-style: normal;
+    font-weight: 400;
+    margin-top: 1rem;
+
+    ${media.S} {
+      margin-top: 1.4rem;
+    }
+  }
+`;
+
+const ContactSection = styled.section`
+  ${defaultSpacing}
+  max-width: 1200px;
+  margin: auto;
+  width: 100%;
+  padding-bottom: 64px;
+  padding-top: 32px;
+
+  ${media.M} {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 64px;
+    padding-bottom: 128px;
+  }
+`;
+
+const ContactSectionHeader = styled.h2`
+  > span {
+    border-bottom: 5px solid ${getColor("pink1")};
+    background-color: none;
+  }
+
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  margin-bottom: 12px;
+
+  ${media.S} {
+    font-size: 2rem;
+    line-height: 2.2rem;
+  }
+
+  ${media.M} {
+    display: inline-block;
+  }
+`;
+
+const ContactSectionParagraph = styled(ContactSectionHeader)`
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+
+  ${media.S} {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+  }
+`;
+
+const ContactSectionTextContainer = styled.div`
+  text-align: center;
+
+  ${media.M} {
+    text-align: left;
+    display: flex;
+    white-space: nowrap;
+    flex-direction: column;
+  }
+`;
+const ContactSectionButtonxBox = styled.div`
+  display: inline-flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 24px;
+  padding-top: 32px;
+
+  > button {
+    min-width: 140px;
+  }
+
+  ${media.M} {
+    width: auto;
+    padding-top: 0px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+`;
 
 const IndexPage = () => {
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>
-        Congratulations
-        <br />
-        <span style={headingAccentStyles}>— you just made a Gatsby site! 🎉🎉🎉</span>
-      </h1>
-      <p style={paragraphStyles}>
-        Edit <code style={codeStyles}>src/pages/index.tsx</code> to see this page
-        update in real-time. 😎
-      </p>
-      <ul style={doclistStyles}>
-        {docLinks.map(doc => (
-          <li key={doc.url} style={docLinkStyle}>
-            <a
-              style={linkStyle}
-              href={`${doc.url}?utm_source=starter&utm_medium=ts-docs&utm_campaign=minimal-starter-ts`}
-            >
-              {doc.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <ul style={listStyles}>
-        {links.map(link => (
-          <li key={link.url} style={{ ...listItemStyles, color: link.color }}>
-            <span>
-              <a
-                style={linkStyle}
-                href={`${link.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter-ts`}
-              >
-                {link.text}
-              </a>
-              {link.badge && (
-                <span style={badgeStyle} aria-label="New Badge">
-                  NEW!
-                </span>
-              )}
-              <p style={descriptionStyle}>{link.description}</p>
-            </span>
-          </li>
-        ))}
-      </ul>
-      <img
-        alt="Gatsby G Logo"
-        src="data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2a10 10 0 110 20 10 10 0 010-20zm0 2c-3.73 0-6.86 2.55-7.75 6L14 19.75c3.45-.89 6-4.02 6-7.75h-5.25v1.5h3.45a6.37 6.37 0 01-3.89 4.44L6.06 9.69C7 7.31 9.3 5.63 12 5.63c2.13 0 4 1.04 5.18 2.65l1.23-1.06A7.959 7.959 0 0012 4zm-8 8a8 8 0 008 8c.04 0 .09 0-8-8z' fill='%23639'/%3E%3C/svg%3E"
-      />
+    <main id="main">
+      <SkipLinks content={skipLinks} />
+
+      <StyledHeroContainer>
+        <StyledHeader>Travel insurance</StyledHeader>
+        <StyledHeroParagraph>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
+          pellentesque sapien.
+        </StyledHeroParagraph>
+        <StyledButton
+          size="big"
+          onClick={() => {
+            console.log("click");
+          }}
+        >
+          Order now
+        </StyledButton>
+      </StyledHeroContainer>
+
+      <DescriptionSection>
+        <DescriptionArticle reverse>
+          <FlexTile>
+            <DescriptionContent>
+              <Header>
+                <span>Insurance for International Visitors</span>
+              </Header>
+              <DescriptionParagraph>
+                Nullam consequat in nunc id hendrerit. Fusce varius rhoncus
+                risus sit amet varius. Etiam fermentum ornare nunc eget congue.
+                Nullam id arcu a justo malesuada rhoncus sit amet at velit.
+              </DescriptionParagraph>
+              <ul>
+                <li>List item #1</li>
+                <li>List item #2</li>
+                <li>List item #3</li>
+              </ul>
+            </DescriptionContent>
+          </FlexTile>
+
+          <FlexTile>
+            <ImageWrapper shadow="left">
+              <StaticImage
+                src="../images/illustration1.webp"
+                alt="A dinosaur"
+                placeholder="blurred"
+                layout="constrained"
+              />
+            </ImageWrapper>
+          </FlexTile>
+        </DescriptionArticle>
+        <DescriptionArticle>
+          <FlexTile>
+            <DescriptionContent>
+              <Header>
+                <span>Safe travels</span>
+              </Header>
+              <DescriptionParagraph>
+                Suspendisse nunc nunc, iaculis ac sollicitudin a, gravida id
+                quam. Sed id consequat nunc, vel viverra nibh. Duis vel ante
+                augue. Mauris congue purus vehicula, vestibulum tellus et,
+                ullamcorper sapien.
+              </DescriptionParagraph>
+            </DescriptionContent>
+          </FlexTile>
+          <FlexTile>
+            <ImageWrapper>
+              <StaticImage
+                src="../images/illustration2.jpeg"
+                alt="A dinosaur"
+                placeholder="blurred"
+                layout="constrained"
+              />
+            </ImageWrapper>
+          </FlexTile>
+        </DescriptionArticle>
+      </DescriptionSection>
+
+      <TopicsSection>
+        <TopicsSectionHeader>
+          <span>Explore our travel topics</span>
+        </TopicsSectionHeader>
+        <TopicsList>
+          <TopicItem>
+            <TopicImage />
+            <TopicHeader>Renting vacation homes</TopicHeader>
+          </TopicItem>
+          <TopicItem>
+            <TopicImage />
+            <TopicHeader>Trends & predictions</TopicHeader>
+          </TopicItem>
+          <TopicItem>
+            <TopicImage />
+            <TopicHeader>Popular travel destinations for 2021</TopicHeader>
+          </TopicItem>
+          <TopicItem>
+            <TopicImage />
+            <TopicHeader>Travel gear for safe travels in 2021</TopicHeader>
+          </TopicItem>
+        </TopicsList>
+      </TopicsSection>
+
+      <TestimonialSection>
+        <TestimonialContainer>
+          <Blockquote>
+            <p>
+              "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
+              consectetur, adipisci velit."
+            </p>
+            <StaticImage src="../images/dd.png" alt="Donald Duck" width={40} />
+            <address>Donald Duck, CEO of Disney</address>
+          </Blockquote>
+        </TestimonialContainer>
+      </TestimonialSection>
+
+      <ContactSection>
+        <ContactSectionTextContainer>
+          <ContactSectionHeader>
+            <span>Are you looking for an insurance?</span>
+          </ContactSectionHeader>
+          <ContactSectionParagraph as="p">
+            <span>Contact us to order now</span>
+          </ContactSectionParagraph>
+        </ContactSectionTextContainer>
+
+        <ContactSectionButtonxBox>
+          <Button variant="outlined">Call us</Button>
+          <Button>Send a message</Button>
+        </ContactSectionButtonxBox>
+      </ContactSection>
     </main>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
 
-export const Head: HeadFC = () => <title>Home Page</title>
+export const Head: HeadFC = () => (
+  <>
+    <title>The Insurer | Home Page</title>
+    <meta
+      name="description"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
+          pellentesque sapien."
+    ></meta>
+  </>
+);

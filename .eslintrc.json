@@ -1,0 +1,23 @@
+{
+  "plugins": ["jsx-a11y", "react"],
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "react-app",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/jsx-runtime"
+  ],
+  "rules": {
+    "no-undef": "off",
+    "react/jsx-uses-react": 2,
+    "react/react-in-jsx-scope": 2,
+    "react/no-unescaped-entities": 0
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "ignorePatterns": ["*.d.ts"]
+}
