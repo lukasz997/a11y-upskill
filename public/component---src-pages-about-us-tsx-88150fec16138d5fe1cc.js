@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunka11y_upskill=self.webpackChunka11y_upskill||[]).push([[158],{3103:function(u,l,n){n.r(l);var t=n(4382);l.default=function(){return(0,t.tZ)("main",{style:{padding:300}},(0,t.tZ)("h1",null,"About us"))}}}]);
+//# sourceMappingURL=component---src-pages-about-us-tsx-88150fec16138d5fe1cc.js.map
