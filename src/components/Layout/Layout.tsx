@@ -358,33 +358,31 @@ const Footer = () => {
           <FooterItem>
             <FooterHeader>About us</FooterHeader>
             <FooterMenuList>
-              <CustomLink to="/newsroom">Newsroom</CustomLink>
-              <CustomLink to="/careers">Careers</CustomLink>
-              <CustomLink to="/our-story">Our story</CustomLink>
-              <CustomLink to="/customer-stories">Customer stories</CustomLink>
+              <CustomLink to="/empty">Newsroom</CustomLink>
+              <CustomLink to="/empty">Careers</CustomLink>
+              <CustomLink to="/empty">Our story</CustomLink>
+              <CustomLink to="/empty">Customer stories</CustomLink>
             </FooterMenuList>
           </FooterItem>
 
           <FooterItem>
             <FooterHeader>Products</FooterHeader>
             <FooterMenuList>
-              <CustomLink to="/holiday">Vacation / Holiday</CustomLink>
-              <CustomLink to="/student">Student / Scholar</CustomLink>
-              <CustomLink to="/mission">Mission</CustomLink>
-              <CustomLink to="/crew">Marine Captain / Crew</CustomLink>
-              <CustomLink to="/business">
-                Employer / Business traveler
-              </CustomLink>
+              <CustomLink to="/empty">Vacation / Holiday</CustomLink>
+              <CustomLink to="/empty">Student / Scholar</CustomLink>
+              <CustomLink to="/empty">Mission</CustomLink>
+              <CustomLink to="/empty">Marine Captain / Crew</CustomLink>
+              <CustomLink to="/empty">Employer / Business traveler</CustomLink>
             </FooterMenuList>
           </FooterItem>
 
           <FooterItem>
             <FooterHeader>Members</FooterHeader>
             <FooterMenuList>
-              <CustomLink to="/newsroom">Forms library</CustomLink>
-              <CustomLink to="/careers">Find a doctor</CustomLink>
-              <CustomLink to="/our-story">Renew policy</CustomLink>
-              <CustomLink to="/customer-stories">Claims center</CustomLink>
+              <CustomLink to="/empty">Forms library</CustomLink>
+              <CustomLink to="/empty">Find a doctor</CustomLink>
+              <CustomLink to="/empty">Renew policy</CustomLink>
+              <CustomLink to="/empty">Claims center</CustomLink>
             </FooterMenuList>
           </FooterItem>
         </FooterListsContainer>

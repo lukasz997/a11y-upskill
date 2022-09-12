@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunka11y_upskill=self.webpackChunka11y_upskill||[]).push([[944],{1367:function(u,l,n){n.r(l);var t=n(4382);l.default=function(){return(0,t.tZ)("main",{style:{padding:300}},(0,t.tZ)("h1",null,"Empty page"))}}}]);
+//# sourceMappingURL=component---src-pages-empty-tsx-2e7cf3ad4576d758e7e3.js.map
