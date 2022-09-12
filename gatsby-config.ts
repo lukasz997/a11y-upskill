@@ -1,6 +1,7 @@
 import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
+  pathPrefix: "/a11y-upskill",
   siteMetadata: {
     title: `a11y-upskill`,
     siteUrl: `https://lukasz997.github.io/a11y-upskill/`,
