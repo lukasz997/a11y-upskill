@@ -10,7 +10,8 @@ const wait = (ms: number) =>
 export const handlers = [
   // Handles a POST /login request
   rest.post("/form", async (req, res, ctx) => {
+    console.log("POST /form");
     await wait(1000);
-    res(ctx.status(200), ctx.json({ test: 123 }));
+    return res(ctx.status(200), ctx.json({ test: 123 }));
   }),
 ];

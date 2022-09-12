@@ -51,16 +51,12 @@ const SecondStep: FunctionComponent<SecondStepProps> = ({
       <Controller
         control={control}
         name="secondStep.country"
-        render={({
-          field: { value, onChange, ref },
-          fieldState: { error },
-        }) => (
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
           <Input
             id="country"
             name="Country"
             label="Country"
             value={value}
-            ref={ref}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
@@ -71,16 +67,12 @@ const SecondStep: FunctionComponent<SecondStepProps> = ({
       <Controller
         control={control}
         name="secondStep.address"
-        render={({
-          field: { value, onChange, ref },
-          fieldState: { error },
-        }) => (
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
           <Input
             id="address"
             name="Address"
             label="Address"
             value={value}
-            ref={ref}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
@@ -92,17 +84,13 @@ const SecondStep: FunctionComponent<SecondStepProps> = ({
       <Controller
         control={control}
         name="secondStep.date"
-        render={({
-          field: { value, onChange, ref },
-          fieldState: { error },
-        }) => (
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
           <DateInput
             id="date"
             label="Date"
             name="Date"
             value={value}
             onChange={onChange}
-            ref={ref}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
             }
@@ -113,16 +101,12 @@ const SecondStep: FunctionComponent<SecondStepProps> = ({
       <Controller
         control={control}
         name="secondStep.incidentDescription"
-        render={({
-          field: { value, onChange, ref },
-          fieldState: { error },
-        }) => (
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
           <Input
             id="incidentDescription"
             name="Incident description"
             label="Incident description"
             value={value}
-            ref={ref}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }

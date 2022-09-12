@@ -23,16 +23,12 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
       <Controller
         control={control}
         name="firstStep.firstName"
-        render={({
-          field: { value, onChange, ref },
-          fieldState: { error },
-        }) => (
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
           <Input
             id="firstName"
             name="First name"
             label="First name"
             value={value}
-            ref={ref}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
@@ -44,16 +40,12 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
       <Controller
         control={control}
         name="firstStep.lastName"
-        render={({
-          field: { value, onChange, ref },
-          fieldState: { error },
-        }) => (
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
           <Input
             id="lastName"
             name="Last name"
             label="Last name"
             value={value}
-            ref={ref}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
@@ -65,17 +57,13 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
       <Controller
         control={control}
         name="firstStep.birthday"
-        render={({
-          field: { value, onChange, ref },
-          fieldState: { error },
-        }) => (
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
           <DateInput
             id="birthday"
             label="Birthday"
             name="birthday"
             value={value}
             onChange={onChange}
-            ref={ref}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
             }
@@ -86,16 +74,12 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
       <Controller
         control={control}
         name="firstStep.phoneNumber"
-        render={({
-          field: { value, onChange, ref },
-          fieldState: { error },
-        }) => (
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
           <Input
             id="phoneNumber"
             name="Phone number"
             label="Phone number"
             value={value}
-            ref={ref}
             type="number"
             onChange={(e) => onChange(parseInt(e.target.value, 10))}
             errorMessage={
@@ -108,16 +92,12 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
       <Controller
         control={control}
         name="firstStep.policyNumber"
-        render={({
-          field: { value, onChange, ref },
-          fieldState: { error },
-        }) => (
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
           <Input
             id="policyNumber"
             name="Policy number"
             label="Policy number"
             value={value}
-            ref={ref}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
@@ -129,16 +109,12 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
       <Controller
         control={control}
         name="firstStep.email"
-        render={({
-          field: { value, onChange, ref },
-          fieldState: { error },
-        }) => (
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
           <Input
             id="email"
             name="Email"
             label="Email"
             value={value}
-            ref={ref}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }

@@ -15,9 +15,17 @@ import { FormProps } from "./report-form.hooks";
 import { Form } from "./styled";
 import { FormsCollection } from "./types";
 
-interface ThirdStepProps extends FormProps {}
+interface ThirdStepProps extends FormProps {
+  isPending: boolean;
+  isSent: boolean;
+}
 
-const ThirdStep: FunctionComponent<ThirdStepProps> = ({ control }) => {
+const ThirdStep: FunctionComponent<ThirdStepProps> = ({
+  control,
+  isPending,
+  isSent,
+  onContinue,
+}) => {
   const { fields, append, remove, update } = useFieldArray({
     control,
     name: "thirdStep.expenseReport",
@@ -31,6 +39,7 @@ const ThirdStep: FunctionComponent<ThirdStepProps> = ({ control }) => {
       <Form
         onSubmit={(e) => {
           e.preventDefault();
+          onContinue();
         }}
       >
         <h2 style={{ marginBottom: 32 }}>Expense report</h2>
@@ -64,8 +73,14 @@ const ThirdStep: FunctionComponent<ThirdStepProps> = ({ control }) => {
           Add another expense
         </Button>
 
-        <Button size="big" style={{ marginTop: 32 }}>
-          Submit
+        <Button
+          size="big"
+          style={{ marginTop: 32 }}
+          disabled={isPending || isSent}
+        >
+          {isPending && "Sending"}
+          {isSent && "Success"}
+          {!isSent && !isPending && "Submit"}
         </Button>
       </Form>
 
@@ -124,14 +139,10 @@ const EditOrCreateItemModal = ({
         <Controller
           control={control}
           name="name"
-          render={({
-            field: { value, onChange, ref },
-            fieldState: { error },
-          }) => (
+          render={({ field: { value, onChange }, fieldState: { error } }) => (
             <Input
               value={value}
               onChange={onChange}
-              ref={ref}
               id="name"
               label="Name"
               name="Label"
@@ -145,14 +156,10 @@ const EditOrCreateItemModal = ({
         <Controller
           control={control}
           name="price"
-          render={({
-            field: { value, onChange, ref },
-            fieldState: { error },
-          }) => (
+          render={({ field: { value, onChange }, fieldState: { error } }) => (
             <Input
               value={value}
-              onChange={onChange}
-              ref={ref}
+              onChange={(e) => onChange(parseFloat(e.target.value))}
               id="price"
               type="number"
               label="Price"

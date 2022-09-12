@@ -5,4 +5,5 @@ export const zindex: { [key: string]: number } = {
   menu: 15,
   alert: 20,
   skipLinks: 100,
+  snackbar: 200,
 };

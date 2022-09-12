@@ -2,7 +2,7 @@ import { Control, useForm } from "react-hook-form";
 import { AllFormsValidator, FormsCollection } from "./types";
 
 export const useReportForm = () => {
-  const { control, handleSubmit, watch, trigger, formState, getValues } =
+  const { control, handleSubmit, watch, trigger, formState, getValues, reset } =
     useForm<FormsCollection>({
       defaultValues: {
         firstStep: { firstName: "", lastName: "", birthday: undefined },
@@ -11,7 +11,7 @@ export const useReportForm = () => {
       resolver: AllFormsValidator,
     });
 
-  return { control, handleSubmit, watch, trigger, formState, getValues };
+  return { control, handleSubmit, watch, trigger, formState, getValues, reset };
 };
 
 export type FormProps = {
