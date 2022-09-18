@@ -11,6 +11,7 @@ export type InputProps = BaseProps & {
   label: string;
   name: string;
   id: string;
+  autoComplete?: string;
   errorMessage?: { message: string; errorName: string };
 } & {
   isTextArea?: boolean;
@@ -27,6 +28,7 @@ const Input = (props: InputProps) => {
     label,
     errorMessage,
     rows,
+    autoComplete,
     isTextArea = false,
     ...inputProps
   } = props;
@@ -37,20 +39,22 @@ const Input = (props: InputProps) => {
 
   return (
     <InputField>
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={id}>
+        {label}
+        {inputProps.required && `*`}
+      </Label>
       <StyledInput
         id={id}
         as={isTextArea ? "textarea" : "input"}
         name={name}
+        autoComplete={autoComplete}
         {...inputProps}
         aria-invalid={!!errorMessage}
         aria-describedby={errorMessage ? errorFieldID : undefined}
         {...additionalProps}
       />
       {errorMessage && (
-        <p id={errorFieldID} style={{ color: "red" }}>
-          {errorMessage.message}
-        </p>
+        <ErrorMessage id={errorFieldID}>{errorMessage.message}</ErrorMessage>
       )}
     </InputField>
   );
@@ -66,7 +70,6 @@ const InputField = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-
   gap: 12px;
 `;
 
@@ -81,6 +84,10 @@ const StyledInput = styled.input`
   :focus-within {
     border: 2px solid ${getColor("pink2")};
   }
+`;
+
+const ErrorMessage = styled.p`
+  color: #d00000;
 `;
 
 export default Input;

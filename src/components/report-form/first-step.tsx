@@ -28,11 +28,13 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
             id="firstName"
             name="First name"
             label="First name"
+            autoComplete="given-name"
             value={value}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
             }
+            required={true}
           />
         )}
       />
@@ -45,11 +47,13 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
             id="lastName"
             name="Last name"
             label="Last name"
+            autoComplete="family-name"
             value={value}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
             }
+            required={true}
           />
         )}
       />
@@ -62,11 +66,13 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
             id="birthday"
             label="Birthday"
             name="birthday"
+            autoComplete="bday"
             value={value}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
             }
+            required={true}
           />
         )}
       />
@@ -81,10 +87,12 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
             label="Phone number"
             value={value}
             type="number"
+            autoComplete="tel"
             onChange={(e) => onChange(parseInt(e.target.value, 10))}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
             }
+            required={true}
           />
         )}
       />
@@ -97,11 +105,13 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
             id="policyNumber"
             name="Policy number"
             label="Policy number"
+            autoComplete="off"
             value={value}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
             }
+            required={true}
           />
         )}
       />
@@ -113,12 +123,14 @@ const FirstStep: FunctionComponent<FirstStepProps> = ({
           <Input
             id="email"
             name="Email"
+            autoComplete="email"
             label="Email"
             value={value}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
             }
+            required={true}
           />
         )}
       />

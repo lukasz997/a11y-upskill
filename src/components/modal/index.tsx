@@ -1,10 +1,6 @@
+/* eslint-disable react/display-name */
 import styled from "@emotion/styled";
-import React, {
-  FunctionComponent,
-  PropsWithChildren,
-  useEffect,
-  useRef,
-} from "react";
+import React, { memo, PropsWithChildren, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { zindex } from "~/theme/zindex";
 
@@ -32,6 +28,7 @@ const ModalContentOuterWrapper = styled.div`
 type ModalProps = PropsWithChildren<{
   open: boolean;
   closeModal: () => void;
+  name?: string;
 }>;
 
 const getGatsbyRoot = () => document.querySelector("#___gatsby");
@@ -46,12 +43,11 @@ const removeScroll = () => {
   getGatsbyRoot()?.setAttribute("aria-hidden", "true");
 };
 
-const Modal: FunctionComponent<ModalProps> = ({
-  children,
-  open,
-  closeModal,
-}) => {
+const Modal = memo(function ({ children, open, closeModal, name }: ModalProps) {
   const backdropRef = useRef<HTMLDivElement>(null);
+  const previousElementRef = useRef<HTMLElement | null>(null);
+  const previousState = useRef(open);
+
   useEffect(() => {
     let escKeyListener = (ev: KeyboardEvent) => {
       if (ev.key === "Escape") {
@@ -79,8 +75,16 @@ const Modal: FunctionComponent<ModalProps> = ({
       }
     };
 
-    if (open) {
+    console.log({ curr: open, prev: previousState.current, name });
+
+    if (open && !previousState.current) {
+      previousState.current = true;
       removeScroll();
+      console.log("open", document.activeElement);
+      if (document.activeElement) {
+        previousElementRef.current = document.activeElement as HTMLElement;
+      }
+
       document.addEventListener("keydown", escKeyListener);
 
       (
@@ -90,9 +94,21 @@ const Modal: FunctionComponent<ModalProps> = ({
       )?.focus();
     }
 
-    if (!open) {
+    if (!open && previousState.current) {
+      previousState.current = false;
+
+      console.log("close - ", name);
       addScroll();
+
       document.removeEventListener("keydown", escKeyListener);
+
+      console.log("focus", previousElementRef.current?.focus);
+
+      if (previousElementRef.current) {
+        previousElementRef.current?.focus();
+      }
+
+      previousElementRef.current = null;
     }
 
     return () => {
@@ -107,10 +123,12 @@ const Modal: FunctionComponent<ModalProps> = ({
 
   return createPortal(
     <ModalBackdrop ref={backdropRef}>
-      <ModalContentOuterWrapper>{children}</ModalContentOuterWrapper>
+      <ModalContentOuterWrapper role="dialog" aria-labelledby="modal-header">
+        {children}
+      </ModalContentOuterWrapper>
     </ModalBackdrop>,
     document?.querySelector("modal-container") ?? document.body
   );
-};
+});
 
 export default Modal;

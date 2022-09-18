@@ -10,6 +10,7 @@ interface RadioGroupProps {
   value: string | number;
   onChange: (value: string | number) => void;
   fieldLabel: string;
+  required?: boolean;
 }
 
 const RadioGroup: FunctionComponent<RadioGroupProps> = ({
@@ -17,6 +18,7 @@ const RadioGroup: FunctionComponent<RadioGroupProps> = ({
   options,
   onChange,
   fieldLabel,
+  required,
 }) => {
   const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let nextValue: string | number = e.target.value;
@@ -28,8 +30,15 @@ const RadioGroup: FunctionComponent<RadioGroupProps> = ({
     onChange(nextValue);
   };
   return (
-    <StyledRadioContainer role="radiogroup" aria-labelledby="radio-label">
-      <StyledHeaderLabel id="radio-label">{fieldLabel}</StyledHeaderLabel>
+    <StyledRadioContainer
+      role="radiogroup"
+      aria-labelledby="radio-label"
+      aria-required={required}
+    >
+      <StyledHeaderLabel id="radio-label">
+        {fieldLabel}
+        {required && "*"}
+      </StyledHeaderLabel>
       {options?.map(({ label, value: itemValue }) => (
         <StyledLabel key={`${itemValue}`}>
           <input
@@ -46,11 +55,14 @@ const RadioGroup: FunctionComponent<RadioGroupProps> = ({
   );
 };
 
-const StyledRadioContainer = styled.div`
+const StyledRadioContainer = styled.fieldset`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
+  padding: 0px;
+  border: none;
 `;
 
 const StyledHeaderLabel = styled.span`

@@ -310,7 +310,7 @@ const FooterContent = styled.div`
   }
 `;
 
-const FooterItem = styled.div`
+const FooterItem = styled.section`
   display: flex;
   flex-direction: column;
   text-align: left;

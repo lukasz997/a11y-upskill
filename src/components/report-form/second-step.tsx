@@ -39,9 +39,10 @@ const SecondStep: FunctionComponent<SecondStepProps> = ({
               value={value}
               onChange={onChange}
               fieldLabel="Purpose of travel"
+              required={true}
             />
             {error?.message && (
-              <p style={{ textAlign: "left", color: "red" }}>
+              <p style={{ textAlign: "left", color: "#d00000" }}>
                 {error?.message}
               </p>
             )}
@@ -57,6 +58,7 @@ const SecondStep: FunctionComponent<SecondStepProps> = ({
             name="Country"
             label="Country"
             value={value}
+            required={true}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
@@ -72,6 +74,8 @@ const SecondStep: FunctionComponent<SecondStepProps> = ({
             id="address"
             name="Address"
             label="Address"
+            required={true}
+            autoComplete="street-address"
             value={value}
             onChange={onChange}
             errorMessage={
@@ -88,8 +92,10 @@ const SecondStep: FunctionComponent<SecondStepProps> = ({
           <DateInput
             id="date"
             label="Date"
+            autoComplete="off"
             name="Date"
             value={value}
+            required={true}
             onChange={onChange}
             errorMessage={
               error && { message: error.message ?? "", errorName: error.type }
@@ -105,6 +111,8 @@ const SecondStep: FunctionComponent<SecondStepProps> = ({
           <Input
             id="incidentDescription"
             name="Incident description"
+            autoComplete="off"
+            required={true}
             label="Incident description"
             value={value}
             onChange={onChange}

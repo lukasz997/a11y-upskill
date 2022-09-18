@@ -28,12 +28,16 @@ export type TravelPurposeType = z.infer<typeof travelPurpose>;
 export const SecondStepFormSchema = z.object({
   purposeOfTravel: travelPurpose,
 
-  country: z.string(),
-  address: z.string(),
+  country: z
+    .string({ required_error: "Country is required" })
+    .min(1, "Country must have at least 1 character"),
+  address: z
+    .string({ required_error: "Address is required" })
+    .min(2, "Address must have at least 2 characters"),
   date: z.date({ required_error: "Date is required" }),
   incidentDescription: z
-    .string()
-    .min(1, "Description is required")
+    .string({ required_error: "Description is required" })
+    .min(3, "Description must have at least 3 characters")
     .max(300, "Descripbtion must be 300 or fewer characters long"),
 });
 

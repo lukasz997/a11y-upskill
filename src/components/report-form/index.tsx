@@ -37,20 +37,31 @@ const ReportForm: FunctionComponent<ReportFormProps> = () => {
 
     if (res.status === 200) {
       setSubmitState("sent");
-      reset({});
     }
   };
 
   return (
     <FormContainer>
       <FormNavigation>
-        <NavigationButton isActive={step === 1} onClick={() => setStep(1)}>
+        <NavigationButton
+          isActive={step === 1}
+          onClick={() => setStep(1)}
+          disabled={step <= 1}
+        >
           Step 1 - Personal Details
         </NavigationButton>
-        <NavigationButton isActive={step === 2} onClick={() => setStep(2)}>
+        <NavigationButton
+          isActive={step === 2}
+          onClick={() => setStep(2)}
+          disabled={step <= 2}
+        >
           Step 2 - Incident Details
         </NavigationButton>
-        <NavigationButton isActive={step === 3} onClick={() => setStep(3)}>
+        <NavigationButton
+          isActive={step === 3}
+          onClick={() => setStep(3)}
+          disabled={step <= 3}
+        >
           Step 3 - Expense Report
         </NavigationButton>
       </FormNavigation>
@@ -122,7 +133,11 @@ const ReportForm: FunctionComponent<ReportFormProps> = () => {
 
       {submitState === "sent" && (
         <Snackbar
-          close={() => setSubmitState("init")}
+          close={() => {
+            setSubmitState("init");
+            setStep(1);
+            reset({});
+          }}
           message="Your form has been sent successfully. Press close to reset form values."
           open={true}
         />

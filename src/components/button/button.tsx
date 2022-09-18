@@ -82,13 +82,13 @@ const ButtonOutlined = styled(ButtonBase)`
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
   :hover {
-    background-color: ${getColor("pink1")};
-    box-shadow: 0px 0px 14px 5px ${getColor("pink1")};
+    background-color: ${getColor("pink0")};
+    box-shadow: 0px 0px 14px 5px ${getColor("pink0")};
   }
 
   :focus,
   :active {
-    background-color: ${getColor("pink2")};
+    background-color: ${getColor("pink1")};
   }
 
   :disabled {
