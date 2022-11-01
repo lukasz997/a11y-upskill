@@ -13,7 +13,9 @@ export const FirstStepFormSchema = z.object({
   email: z
     .string({ required_error: "Email is required" })
     .email({ message: "Invalid email address" }),
-  policyNumber: z.string({ required_error: "Policy number is required" }),
+  policyNumber: z
+    .string({ required_error: "Policy number is required" })
+    .min(1, { message: "Policy number is required" }),
 });
 
 export type FirstStepFormType = z.infer<typeof FirstStepFormSchema>;

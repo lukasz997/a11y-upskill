@@ -75,12 +75,10 @@ const Modal = memo(function ({ children, open, closeModal, name }: ModalProps) {
       }
     };
 
-    console.log({ curr: open, prev: previousState.current, name });
-
     if (open && !previousState.current) {
       previousState.current = true;
       removeScroll();
-      console.log("open", document.activeElement);
+
       if (document.activeElement) {
         previousElementRef.current = document.activeElement as HTMLElement;
       }
@@ -97,12 +95,9 @@ const Modal = memo(function ({ children, open, closeModal, name }: ModalProps) {
     if (!open && previousState.current) {
       previousState.current = false;
 
-      console.log("close - ", name);
       addScroll();
 
       document.removeEventListener("keydown", escKeyListener);
-
-      console.log("focus", previousElementRef.current?.focus);
 
       if (previousElementRef.current) {
         previousElementRef.current?.focus();
@@ -123,7 +118,11 @@ const Modal = memo(function ({ children, open, closeModal, name }: ModalProps) {
 
   return createPortal(
     <ModalBackdrop ref={backdropRef}>
-      <ModalContentOuterWrapper role="dialog" aria-labelledby="modal-header">
+      <ModalContentOuterWrapper
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-header"
+      >
         {children}
       </ModalContentOuterWrapper>
     </ModalBackdrop>,
